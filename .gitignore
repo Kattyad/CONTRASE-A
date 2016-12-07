@@ -1,0 +1,35 @@
+#include <LiquidCrystal.h>
+LiquidCrystal lcd (12,11,5,4,3,2);
+String txt1= "CONTRASENA",txt2 = "CORRECTA",txt3 = "INCORRECTA",in;  
+
+
+void setup() {
+  // put your setup code here, to run once:
+lcd.begin(16,2);
+  Serial.begin(9600);
+  Serial.println("HOLA");
+  Serial.println("Ingrese Su Contrasena:");
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+ 
+  if (Serial.available()>0){ 
+    in=Serial.readString();  
+    Serial.println(in);      //Imprime
+    lcd.clear();
+    if(in=="katty"){         //compara el texto establecido como contraseña
+      lcd.setCursor(0, 0);   
+      lcd.print(txt2);      //Imprime 
+      lcd.setCursor(0, 1);    
+      lcd.print(txt1);      //Imprime
+    }
+    else{                  //si la contraseña es correcta
+      lcd.setCursor(0, 0);   
+      lcd.print(txt3);    //Imprime
+      lcd.setCursor(0, 1);  
+      lcd.print(txt1);     //Imprime
+    }
+  }  
+  
+}
